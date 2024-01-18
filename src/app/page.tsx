@@ -1,113 +1,291 @@
-import Image from 'next/image'
+"use client";
+import Image from "next/image";
+import {useState} from "react";
+
+const images = [
+  {id: 1, src: "/kemper-angle.jpg"},
+  {id: 2, src: "/kemper-front.jpg"},
+  {id: 3, src: "/kemper-rear.jpg"},
+];
+
+const formFactor = [
+  {
+    id: 1,
+    title: "Profiler Head",
+    description:
+      "Compact amplifier head, perfect for a speaker cabinet or desk.",
+  },
+  {
+    id: 2,
+    title: "Profiler Rack",
+    description: "3U rackmount version of the classic profiling amplifier.",
+  },
+];
+
+const powerAmps = [
+  {
+    id: 1,
+    title: "None",
+    description: "Use in the studio or with your own power amp.",
+    price: 0,
+  },
+  {
+    id: 2,
+    title: "Powered",
+    description: "Built-in 600W solid state power amp.",
+    price: 449,
+  },
+];
+
+const footController = [
+  {
+    id: 1,
+    title: "None",
+    price: 0,
+  },
+  {
+    id: 2,
+    title: "Profiler Remote Foot Controller",
+    price: 449,
+  },
+];
 
 export default function Home() {
+  const [currentImage, setCurrentImage] = useState(images[0]);
+  const [currentFormFactor, setCurrentFormFactor] = useState(formFactor[0]);
+  const [currentPowerAmp, setCurrentPowerAmp] = useState(powerAmps[0]);
+  const [currentFootController, setCurrentFootController] = useState(
+    footController[0]
+  );
+  const [finalPrice, setFinalPrice] = useState(1799);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <div className="max-w-[543px] md:max-w-[1024px] mx-auto pb-32 px-4">
+        <div className="main p-6 w-full">
+          {/* header */}
+
+          <header className="pb-6 border-b border-b-[#D2D6DC]">
+            <h1 className="text-4xl mb-3 font-extrabold">
+              Get your Kemper Profiling Amp
+            </h1>
+            <p className="text-xl">
+              All your favorite amps and effects, together in one little box.
+            </p>
+          </header>
+
+          {/* main */}
+          <div className="flex items-start flex-wrap md:flex-nowrap gap-8 mt-12">
+            {/* image container */}
+            <div className="shrink-0 md:sticky md:top-12">
+              {/* main image */}
+              <div className="border border-[#E5E7EB] rounded-lg py-3 px-1 mb-4 relative max-w-full h-[206px] sm:h-[388px] md:w-[450px] md:h-[310px]">
+                <Image
+                  src={currentImage.src}
+                  alt={currentImage.src}
+                  // width={450}
+                  // height={310}
+                  fill
+                  objectFit="contain"
+                  className="w-full h-full top-0 left-0"
+                />
+              </div>
+              <div className="flex items-center gap-4">
+                {images.map((image) => (
+                  <div
+                    key={image.id}
+                    className={`py-1 px-4 rounded-lg cursor-pointer shadow-sm ${
+                      image.id === currentImage.id
+                        ? "border-2 border-[#374151]"
+                        : "border border-[#E5E7EB]"
+                    }`}
+                    onClick={() => setCurrentImage(image)}
+                    tabIndex={0}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.src}
+                      width={110}
+                      height={75}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* product details */}
+            <div>
+              {/* meta details */}
+              <div className="mb-12">
+                <p className="text-[#6B7280] text-sm mb-1">Starting at</p>
+                <p className="text-[#161E2E] text-5xl font-extrabold mb-6">
+                  $1799
+                </p>
+                <p className="text-[#161E2E] text-[18px] mb-4">
+                  The KEMPER PROFILER™ is the leading-edge digital guitar
+                  amplifier and all-in-one effects processor.
+                </p>
+                <p className="text-[#6B7280] text-base mb-4">
+                  Hailed as a game-changer by guitarists the world over, the
+                  PROFILER™ is the first digital guitar amp to really nail the
+                  full and dynamic sound of a guitar or bass amp.
+                </p>
+                <p>
+                  This is made possible by a radical, patented technology and
+                  concept which we call &quot;PROFILING&quot;.
+                </p>
+              </div>
+
+              {/* form factor */}
+              <div className="mb-12">
+                <p className="text-[#161E2E] text-[18px] font-medium mb-2">
+                  Form Factor
+                </p>
+                <div className="flex items-center gap-4">
+                  {formFactor.map((form) => (
+                    <div
+                      key={form.id}
+                      className={`py-5 px-6 w-fit rounded-lg cursor-pointer shadow-sm ${
+                        form.id === currentFormFactor.id
+                          ? "border-2 border-[#374151]"
+                          : "border border-[#D2D6DC]"
+                      }`}
+                      onClick={() => setCurrentFormFactor(form)}
+                      tabIndex={1}
+                    >
+                      <p className="text-[#161E2E] text-sm font-medium mb-2">
+                        {form.title}
+                      </p>
+                      <p className="text-[#6B7280] text-sm">
+                        {form.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* power amp */}
+              <div className="mb-12">
+                <p className="text-[#161E2E] text-[18px] font-medium mb-2">
+                  Power Amp
+                </p>
+                <div className="flex flex-col gap-4">
+                  {powerAmps.map((power) => (
+                    <div
+                      key={power.id}
+                      className={`py-5 px-6 shadow-sm flex items-center justify-between gap-3 rounded-lg cursor-pointer ${
+                        power.id === currentPowerAmp.id
+                          ? "border-2 border-[#374151]"
+                          : "border border-[#D2D6DC]"
+                      }`}
+                      onClick={() => {
+                        setCurrentPowerAmp(power);
+                        setFinalPrice(
+                          (prevPrice) =>
+                            prevPrice + (power.price - currentPowerAmp.price)
+                        );
+                      }}
+                      tabIndex={2}
+                    >
+                      <div className="flex flex-col gap-2">
+                        <p className="text-[#161E2E] font-medium text-sm">
+                          {power.title}
+                        </p>
+                        <p className="text-[#6B7280] text-sm">
+                          {power.description}
+                        </p>
+                      </div>
+                      {power.price > 0 && (
+                        <p className="text-[#161E2E] text-sm">
+                          + ${power.price}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* foot controller */}
+              <div className="mb-12">
+                <p className="text-[#161E2E] text-[18px] font-medium mb-2">
+                  Foot controller
+                </p>
+                <div className="flex flex-col gap-4">
+                  {footController.map((foot) => (
+                    <div
+                      key={foot.id}
+                      className={`py-5 px-6 rounded-lg shadow-sm flex items-center gap-3 justify-between cursor-pointer ${
+                        currentFootController.id === foot.id
+                          ? "border-2 border-[#374151]"
+                          : "border border-[#D2D6DC]"
+                      }`}
+                      onClick={() => {
+                        setCurrentFootController(foot);
+                        setFinalPrice(
+                          (prevPrice) =>
+                            prevPrice +
+                            (foot.price - currentFootController.price)
+                        );
+                      }}
+                      tabIndex={3}
+                    >
+                      <p className="text-[#161E2E] font-medium text-sm">
+                        {foot.title}
+                      </p>
+                      {foot.price > 0 && (
+                        <p className="text-[#161E2E] text-sm">
+                          + ${foot.price}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      {/* footer */}
+      <footer className="bg-[#F9FAFB] w-screen border border-t-[#D2D6DC] md:fixed md:bottom-0 md:left-0">
+        <div className="py-6 px-8 flex items-center gap-8 justify-between flex-wrap">
+          <div className="flex items-start gap-3">
+            {/* icon */}
+            <div></div>
+            <div>
+              <p className="text-[#161E2E] text-sm font-medium m-1">
+                Free Shipping{" "}
+              </p>
+              <p className="text-[#6B7280] text-sm">
+                Get 2-day free shipping anywhere in North America.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            {/* icon */}
+            <div></div>
+            <div>
+              <p className="text-[#161E2E] text-sm font-medium m-1">
+                Free Shipping{" "}
+              </p>
+              <p className="text-[#6B7280] text-sm">
+                Get 2-day free shipping anywhere in North America.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-6 shrink-0">
+            <div className="flex flex-col justify-end gap-1">
+              <p className="text-[#161E2E] text-3xl font-bold">${finalPrice}</p>
+              <p className="text-[#6B7280] text-sm">
+                Need financing?
+                <span className="underline"> Learn more </span>
+              </p>
+            </div>
+            <button className="inline-flex items-center justify-center bg-[#161E2E] rounded-md text-sm font-medium text-white py-2 px-4">
+              Buy now
+            </button>
+          </div>
+        </div>
+      </footer>
     </main>
-  )
+  );
 }
