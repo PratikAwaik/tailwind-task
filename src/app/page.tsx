@@ -247,12 +247,17 @@ export default function Home() {
       </div>
       {/* footer */}
       <footer className="bg-[#F9FAFB] w-screen border border-t-[#D2D6DC] md:fixed md:bottom-0 md:left-0">
-        <div className="py-6 px-8 flex items-center gap-8 justify-between flex-wrap">
+        <div className="py-6 px-8 flex items-center gap-8 justify-between flex-wrap md:flex-nowrap">
           <div className="flex items-start gap-3">
             {/* icon */}
-            <div></div>
+            <Image
+              src={"/globe-icon.svg"}
+              alt="globe icon"
+              width={20}
+              height={20}
+            />
             <div>
-              <p className="text-[#161E2E] text-sm font-medium m-1">
+              <p className="text-[#161E2E] text-sm font-medium">
                 Free Shipping{" "}
               </p>
               <p className="text-[#6B7280] text-sm">
@@ -262,9 +267,15 @@ export default function Home() {
           </div>
           <div className="flex items-start gap-3">
             {/* icon */}
-            <div></div>
+            <Image
+              src={"/shield-check-icon.svg"}
+              alt="globe icon"
+              width={20}
+              height={20}
+            />
+
             <div>
-              <p className="text-[#161E2E] text-sm font-medium m-1">
+              <p className="text-[#161E2E] text-sm font-medium">
                 Free Shipping{" "}
               </p>
               <p className="text-[#6B7280] text-sm">
