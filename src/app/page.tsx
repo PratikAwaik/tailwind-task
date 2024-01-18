@@ -88,6 +88,7 @@ export default function Home() {
                   fill
                   objectFit="contain"
                   className="w-full h-full top-0 left-0"
+                  loading="lazy"
                 />
               </div>
               <div className="flex items-center gap-4">
@@ -107,6 +108,7 @@ export default function Home() {
                       alt={image.src}
                       width={110}
                       height={75}
+                      loading="lazy"
                     />
                   </div>
                 ))}
